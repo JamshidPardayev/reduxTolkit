@@ -1,11 +1,10 @@
 import React from 'react'
-
 const App = () => {
   return (
     <div>
-      
+      <MainRoutes />
     </div>
   )
 }
 
-export default App
+export default React.memo(App)
