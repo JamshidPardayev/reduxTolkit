@@ -2,35 +2,9 @@
 
 @layer base {
   * {
-    /* Misol uchun, border rangini va outline effektini to‘g‘ri qo‘llash */
-    @apply border border-gray-300 outline-none ring-1 ring-gray-500 ring-opacity-50;
+    @apply border border-gray-300 outline-none ring ring-gray-500 ring-opacity-50;
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-@keyframes wave1 {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-@keyframes wave2 {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-60%);
-  }
-}
-@keyframes wave3 {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-40%);
   }
 }
