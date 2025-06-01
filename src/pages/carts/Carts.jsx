@@ -7,18 +7,27 @@ import { toggleWishlist } from "../../redux/features/wishlist.slice";
 import { addToCart, removeFromCart } from "../../redux/features/cart.slice";
 import toast from "react-hot-toast";
 
-const Wishlist = () => {
+const Carts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const wishlistItems = useSelector((state) => state.wishlist.items);
   const cartItems = useSelector((state) => state.cart.items);
+  const wishlistItems = useSelector((state) => state.wishlist.items);
 
+  // Tekshiradi: wishlistda bormi?
+  const isInWishlist = (productId) =>
+    wishlistItems.some((item) => item.id === productId);
+
+  // Tekshiradi: cartda bormi? (bu sahifa uchun foydali)
   const isInCart = (productId) =>
     cartItems.some((item) => item.id === productId);
 
-  const handleWishlist = (product) => {
+  const handleWishlistToggle = (product) => {
     dispatch(toggleWishlist(product));
-    toast.error("Wishlistdan o‘chirildi!");
+    if (isInWishlist(product.id)) {
+      toast.error("Wishlistdan o‘chirildi!");
+    } else {
+      toast.success("Wishlistga qo‘shildi!");
+    }
   };
 
   const handleCartToggle = (product) => {
@@ -33,14 +42,14 @@ const Wishlist = () => {
 
   return (
     <div className="max-w-[1200px] mx-auto px-4">
-      <h1 className="text-[30px] font-semibold text-center">Wishlist</h1>
+      <h1 className="text-[30px] font-semibold text-center">Savat</h1>
       <img src={vector} alt="vectorImg" className="mx-auto mt-3 mb-10" />
 
-      {wishlistItems.length === 0 ? (
-        <p className="text-center text-lg text-gray-500">Wishlist bo‘sh...</p>
+      {cartItems.length === 0 ? (
+        <p className="text-center text-lg text-gray-500">Savat bo‘sh...</p>
       ) : (
         <div className="grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
-          {wishlistItems.map((product) => (
+          {cartItems.map((product) => (
             <div
               key={product?.id}
               className="border max-w-[350px] max-sm:mx-auto border-[#9c5ada] rounded-[10px] p-3 shadow-[0px_2px_8px_3px_#9c5ada]"
@@ -53,16 +62,17 @@ const Wishlist = () => {
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-end items-start gap-4 p-3">
                   <FaHeart
-                    onClick={() => handleWishlist(product)}
-                    className="text-[25px] text-red-500 cursor-pointer"
+                    onClick={() => handleWishlistToggle(product)}
+                    className={`text-[25px] cursor-pointer ${
+                      isInWishlist(product.id)
+                        ? "text-red-500"
+                        : "text-white hover:text-red-500"
+                    }`}
                   />
                   <FaShoppingCart
                     onClick={() => handleCartToggle(product)}
-                    className={`text-[25px] cursor-pointer transition duration-300 ${
-                      isInCart(product.id)
-                        ? "text-green-500"
-                        : "text-white hover:text-green-500"
-                    }`}
+                    className="text-[25px] text-green-500 cursor-pointer"
+                    title="Savatdan o‘chirish"
                   />
                 </div>
               </div>
@@ -108,4 +118,4 @@ const Wishlist = () => {
   );
 };
 
-export default React.memo(Wishlist);
+export default React.memo(Carts);
