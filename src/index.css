@@ -2,7 +2,7 @@
 
 @layer base {
   * {
-    @apply border border-gray-300 outline-none ring ring-gray-500 ring-opacity-50;
+    @apply border border-gray-300 outline-none ring ring-gray-500 ring-opacity-[0.5];
   }
   body {
     @apply bg-background text-foreground;
