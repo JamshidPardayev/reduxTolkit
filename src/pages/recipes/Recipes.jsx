@@ -23,7 +23,7 @@ const Recipes = () => {
         {data?.recipes?.map((recipe) => (
           <div
             key={recipe?.id}
-            className="border max-w-[350px] max-sm:mx-auto border-[#9c5ada] rounded-[10px] p-3 shadow-[0px_2px_8px_3px_#9c5ada]"
+            className="border max-w-[350px] max-sm:mx-auto border-violet-600 rounded-[10px] p-3 shadow-[0px_2px_8px_3px_#9c5ada]"
           >
             <div className="relative max-w-[350px] overflow-hidden group">
               <img
@@ -40,7 +40,7 @@ const Recipes = () => {
               {recipe?.title}
             </h1>
             <button
-              className={`relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-[#9c5ada] font-semibold bg-transparent group transition-colors duration-300 cursor-pointer shadow-[0px_2px_8px_3px_#8b3fd1]`}
+              className={`relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-violet-600 font-semibold bg-transparent group transition-colors duration-300 cursor-pointer shadow-[0px_2px_8px_3px_#8b3fd1]`}
               onClick={() => {
                 navigate(`recipesDetails/${recipe?.id}`);
               }}

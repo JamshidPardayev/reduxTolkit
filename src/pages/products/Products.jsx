@@ -16,7 +16,6 @@ const Products = () => {
   const wishlistItems = useSelector((state) => state.wishlist.items);
   const cartItems = useSelector((state) => state.cart.items);
 
-  // LocalStorage'dan boshlang'ich o'qish
   useEffect(() => {
     const savedWishlist = localStorage.getItem("wishlistItems");
     if (savedWishlist) {
@@ -28,12 +27,10 @@ const Products = () => {
     }
   }, [dispatch]);
 
-  // Wishlist o'zgarganda localStorage ga saqlash
   useEffect(() => {
     localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
   }, [wishlistItems]);
 
-  // Cart o'zgarganda localStorage ga saqlash
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -79,7 +76,7 @@ const Products = () => {
         {data?.products?.map((product) => (
           <div
             key={product?.id}
-            className="border max-w-[350px] max-sm:mx-auto border-[#9c5ada] rounded-[10px] p-3 shadow-[0px_2px_8px_3px_#9c5ada]"
+            className="border max-w-[350px] max-sm:mx-auto border-violet-600 rounded-[10px] p-3 shadow-[0px_2px_8px_3px_#9c5ada]"
           >
             <div className="relative overflow-hidden group">
               <img
@@ -110,7 +107,7 @@ const Products = () => {
               {product?.title}
             </h1>
             <button
-              className="relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-[#9c5ada] font-semibold bg-transparent group transition-colors duration-300 shadow-[0px_2px_8px_3px_#8b3fd1]"
+              className="relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-violet-600 font-semibold bg-transparent group transition-colors duration-300 shadow-[0px_2px_8px_3px_#8b3fd1]"
               onClick={() => navigate(`/productDetails/${product?.id}`)}
             >
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">

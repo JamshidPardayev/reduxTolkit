@@ -45,7 +45,7 @@ const RecipesDetails = () => {
 
           </div>
         </div>
-        <div className="flex flex-col border rounded-[5px] border-[#8b3fd1] p-3 shadow-[0px_2px_8px_3px_#8b3fd1]">
+        <div className="flex flex-col border rounded-[5px] border-violet-600 p-3 shadow-[0px_2px_8px_3px_#8b3fd1]">
           <p className="text-[20px] mb-2">{recipe?.cuisine} Food</p>
           <p className="mb-2 text-[18px] font-semibold">Ingredients:</p>
           <ul className="list-disc list-inside space-y-1 mb-4">
@@ -55,7 +55,7 @@ const RecipesDetails = () => {
           </ul>
         </div>
       </div>
-      <p className="text-[16px] text-gray-600 border rounded-[5px] border-[#8b3fd1] p-2 mt-4 shadow-[0px_2px_8px_3px_#8b3fd1]">
+      <p className="text-[16px] text-gray-600 border rounded-[5px] border-violet-600 p-2 mt-4 shadow-[0px_2px_8px_3px_#8b3fd1]">
         <span className="text-[20px] font-semibold text-black">
           Instructions:{" "}
         </span>{" "}

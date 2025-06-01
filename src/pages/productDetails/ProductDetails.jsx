@@ -50,7 +50,7 @@ const ProductDetails = () => {
           ))}
         </div>
       </div>
-      <div className="w-[50%] max-sm:w-[100%] mb-4">
+      <div className="w-[50%] max-sm:w-[100%] mb-4 border border-violet-600 p-3 rounded-[5px] shadow-[0px_2px_8px_3px_#9c5ada]" >
         <h1 className="text-[24px] font-semibold mb-3">
           {product?.brand} {product?.title} from {product?.category}
         </h1>
