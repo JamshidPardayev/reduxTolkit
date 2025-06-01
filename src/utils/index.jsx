@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
 
-const MainRoutes = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default React.memo(MainRoutes)
+export const Loading = () => {
+  return <div className="text-[50px] text-center pt-4">Loading... <span className="loader"></span></div>;
+};
+export const Suspense = ({ children }) => {
+  return <React.Suspense fallback={<Loading />}>{children}</React.Suspense>;
+};

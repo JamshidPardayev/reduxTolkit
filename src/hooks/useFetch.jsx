@@ -9,7 +9,7 @@ export const useFetch = (endpoint) => {
   useEffect(() => {
     setLoading(true);
     api
-      .get(endpoint)
+      .get(endpoint.startsWith("/") ? endpoint : `/${endpoint}`)
       .then((res) => {
         console.log(res);
         setData(res.data);
