@@ -13,6 +13,7 @@ const Carts = lazy(() => import("./carts/Carts"));
 const Recipes = lazy(() => import("./recipes/Recipes"))
 const RecipesDetails = lazy(() => import("./recipesDetails/RecipesDetails"))
 const MainRoutes = () => {
+ 
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />

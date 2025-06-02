@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import vector from "../../assets/vector.png";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import toast from "react-hot-toast";
+
 const Recipes = () => {
   const { data, error, loading } = useFetch("/recipes");
   const navigate = useNavigate();
+
+  const [wishlist, setWishlist] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  const toggleWishlist = (id) => {
+    if (wishlist.includes(id)) {
+      setWishlist(wishlist.filter((item) => item !== id));
+      toast.info("Removed from Wishlist");
+    } else {
+      setWishlist([...wishlist, id]);
+      toast.success("Added to Wishlist");
+    }
+  };
+
+  const toggleCart = (id) => {
+    setCart(cart.filter((item) => item !== id));
+    if (cart.includes(id)) {
+      toast.error("Removed from Cart");
+    } else {
+      setCart([...cart, id]);
+      toast.success("Added to Cart");
+    }
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4">
-      <h1 className="text-[30px] mx-auto font-semibold text-center ">
-        Recipes
-      </h1>
-      <img src={vector} alt="vectorImg" className="mx-auto mt-3 mb-10 " />
+      <h1 className="text-[30px] mx-auto font-semibold text-center">Recipes</h1>
+      <img src={vector} alt="vectorImg" className="mx-auto mt-3 mb-10" />
       {loading && <p>Loading...</p>}
 
       {error && (
@@ -19,6 +43,7 @@ const Recipes = () => {
           Failed to load products. Please try again.
         </p>
       )}
+
       <div className="grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
         {data?.recipes?.map((recipe) => (
           <div
@@ -32,23 +57,34 @@ const Recipes = () => {
                 className="hover:scale-105 hover:opacity-80 duration-300 cursor-pointer w-full h-auto"
               />
               <div className="absolute top-0 right-0 flex justify-center gap-5 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <FaHeart className="text-[25px] text-gray-900 cursor-pointer" />
-                <FaShoppingCart className="text-[25px] text-gray-900 cursor-pointer" />
+                <FaHeart
+                  className={`text-[25px] cursor-pointer ${
+                    wishlist.includes(recipe.id)
+                      ? "text-red-500"
+                      : "text-gray-900"
+                  }`}
+                  onClick={() => toggleWishlist(recipe.id)}
+                />
+                <FaShoppingCart
+                  className={`text-[25px] cursor-pointer ${
+                    cart.includes(recipe.id)
+                      ? "text-green-500"
+                      : "text-gray-900"
+                  }`}
+                  onClick={() => toggleCart(recipe.id)}
+                />
               </div>
             </div>
             <h1 className="text-2xl line-clamp-1 text-center my-4 font-semibold text-gray-900">
               {recipe?.title}
             </h1>
             <button
-              className={`relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-violet-600 font-semibold bg-transparent group transition-colors duration-300 cursor-pointer shadow-[0px_2px_8px_3px_#8b3fd1]`}
-              onClick={() => {
-                navigate(`recipesDetails/${recipe?.id}`);
-              }}
+              className="relative overflow-hidden px-6 h-[40px] w-full rounded-xl text-gray-900 border border-violet-600 font-semibold bg-transparent group transition-colors duration-300 cursor-pointer shadow-[0px_2px_8px_3px_#8b3fd1]"
+              onClick={() => navigate(`/recipesDetails/${recipe?.id}`)}
             >
               <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                 See More
               </span>
-
               <span className="absolute inset-0 w-full h-full translate-y-[100%] group-hover:translate-y-[0] transition-transform duration-700 ease-out z-0 pointer-events-none">
                 <svg
                   className="absolute inset-0 w-[200%] h-full"
